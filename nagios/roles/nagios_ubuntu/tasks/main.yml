@@ -1,0 +1,24 @@
+---
+- name: install Nagios (Ubuntu)
+  apt:
+    name: nagios4-core
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+
+- name: Start Nagios (Ubuntu)
+  service:
+    name: nagios4
+    state: restarted
+    enabled: true
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install Nagios Dependencies (Ubuntu)
+  apt:
+    name:
+      - libgd-dev
+      - libpng-dev
+      - libfreetype6-dev
+      - gcc
+      - libc6-dev
+    state: latest
+  when: ansible_distribution == "Ubuntu"

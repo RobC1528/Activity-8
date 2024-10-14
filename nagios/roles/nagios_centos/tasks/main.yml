@@ -1,0 +1,30 @@
+---
+- name: Install EPEL repo (PreReq)
+  yum:
+    name: epel-release
+    state: latest
+  when: ansible_distribution == "CentOS"
+
+- name: Install Nagion (centOS)
+  yum:
+    name: nagios
+    state: latest
+  when: ansible_distribution == "CentOS"
+
+- name: Start Nagios (centOS)
+  service:
+    name: nagios
+    state: restarted
+    enabled: true
+  when: ansible_distribution == "CentOS"
+
+- name: Install Nagios Dependencies (centos)
+  yum:
+    name:
+      - gd-devel
+      - libpng-devel
+      - freetype-devel
+      - gcc
+      - glibc
+    state: latest
+  when: ansible_distribution == "CentOS"
